@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-home',
@@ -7,17 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  h1Style: boolean = false;
+  users: Object;
 
-  constructor() { }
+  //dependency injection, reference methods from DataService
+  constructor(private data: DataService) { }
 
   ngOnInit() {
+    this.data.getUsers().subscribe(data => {
+      this.users = data
+      console.log(this.users)
+    })
   }
 
-  //method from home html firstClick
-firstClick() {
-  this.h1Style = true;
-}
 
 }
 
